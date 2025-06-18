@@ -40,9 +40,10 @@ const obtenerClientePorDocumento = async (req, res) => {
 const crearCliente = async (req, res) => {
     // Crea una nueva instancia del modeloCliente usando los datos enviados por el usuario
     const nuevoCliente = new modeloCliente({
-        documento: req.body.documento,           
+        documento: req.body.documento,           // Documento de identidad único del cliente
+        nombreCompleto: req.body.nombreCompleto, 
         correo: req.body.correo,                 
-        telefono: req.body.telefono,            
+        telefono: req.body.telefono,             
         direccion: req.body.direccion,           
         fechaNacimiento: req.body.fechaNacimiento
     });

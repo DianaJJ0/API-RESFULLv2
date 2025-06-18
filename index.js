@@ -1,20 +1,28 @@
+const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 
-const express = require('express');
-const morgan = require('morgan');
-const routes = require('./routes');
+// Conexión a la base de datos
+require('./config/database');
 
 const app = express();
 
 // Middlewares
-app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: false })); // Configura express para que pueda recibir datos en formato URL-encoded
-app.use(express.json()); // esto Configura express para que pueda recibir datos en formato JSON
+app.use(cors());
+app.use(express.json());
 
+// Importar rutas
+const productosRoutes = require('./routes/productos.routes');
+const usuariosRoutes = require('./routes/usuarios.routes');
+const clientesRoutes = require('./routes/clientes.routes');
 
-app.use('/v2', routes); // la ruta base para el enrutador
+// Usar rutas
+app.use('/productos', productosRoutes);
+app.use('/usuarios', usuariosRoutes);
+app.use('/clientes', clientesRoutes);
 
-// Servidor
-app.listen(process.env.PORT || 9090, () => {
-    console.log(`Servidor corriendo en el puerto: ${process.env.PORT || 9090}`);
+// Puerto
+const PORT = process.env.PORT || 9090;
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });

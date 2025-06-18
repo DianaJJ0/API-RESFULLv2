@@ -27,7 +27,7 @@ const schemaProducto = new mongoose.Schema({
     },
     imagen: {
         type: String,
-        required: [true, 'La imagen es obligatoria']
+        required: [false, 'La imagen no es obligatoria']
     },
     habilitado: {
         type: Boolean,

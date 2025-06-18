@@ -25,13 +25,13 @@ const getProductoReferencia = async (req, res) => {
 const nuevoProducto = async (req, res) => {
     try {
         const nuevoProductoData = {
-            referencia: req.body.referenciaProducto,
-            nombre: req.body.nombreProducto,
-            descripcion: req.body.descripcionProducto,
-            precio: req.body.precioProducto,
-            stock: req.body.stockProducto,
-            imagen: req.body.imagenProducto,
-            habilitado: true
+            referencia: req.body.referencia,
+            nombre: req.body.nombre,
+            descripcion: req.body.descripcion,
+            precio: req.body.precio,
+            stock: req.body.stock,
+            imagen: req.body.imagen,
+            habilitado: req.body.habilitado !== undefined ? req.body.habilitado : true
         };
 
         const insercion = await modeloProducto.create(nuevoProductoData);
@@ -45,13 +45,12 @@ const nuevoProducto = async (req, res) => {
 // PUT - Actualizar producto
 const actualizarProducto = async (req, res) => {
     const datosActualizados = {
-        referencia: req.params.ref,
-        nombre: req.body.nombreProducto,
-        descripcion: req.body.descripcionProducto,
-        precio: req.body.precioProducto,
-        stock: req.body.stockProducto,
-        imagen: req.body.imagenProducto,
-        habilitado: true,
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        precio: req.body.precio,
+        stock: req.body.stock,
+        imagen: req.body.imagen,
+        habilitado: req.body.habilitado !== undefined ? req.body.habilitado : true,
     };
 
     try {
